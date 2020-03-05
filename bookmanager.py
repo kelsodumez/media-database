@@ -6,11 +6,12 @@ from flask import request
 from flask import redirect
 from flask_sqlalchemy import SQLAlchemy
 
+
 project_dir = os.path.dirname(os.path.abspath(__file__))
 database_file = "sqlite:///{}".format(os.path.join(project_dir, "bookdatabase.db"))
-
 app = Flask(__name__)
 app.config["SQLALCHEMY_DATABASE_URI"] = database_file
+
 
 db = SQLAlchemy(app)
 
@@ -19,7 +20,7 @@ class Book(db.Model):
     author = db.Column(db.String(80), unique=False, nullable=False, primary_key=False)
 
 class Film(db.Model):
-    title = db.Column(db.String(80), unique=True, nullable=False, primary_key=True)
+    filmtitle = db.Column(db.String(80), unique=True, nullable=False, primary_key=True)
     director = db.Column(db.String(80), unique=False, nullable=False, primary_key=False)
 
 
@@ -28,32 +29,20 @@ class Film(db.Model):
 
 @app.route('/', methods=["GET", "POST"])
 def home():
-    books = None
+    books = []
+    films = []
     if request.form:
         try:
             book = Book(title=request.form.get("title"), author=request.form.get("author"))
-            db.session.add(book)
+            film = Film(filmtitle=request.form.get("filmtitle"), director=request.form.get("director"))
+            db.session.add(book,film)
             db.session.commit()
         except Exception as e:
             print("Failed to add book")
             print(e)
     books = Book.query.all()
-    return render_template("home.html", books=books)
-
-@app.route('/2', methods=["GET", "POST"])
-def homefilms():
-    films = None
-    if request.form:
-        try:
-            film = Film(title=request.form.get("title"), author=request.form.get("author"))
-            db.session.add(book)
-            db.session.commit()
-        except Exception as e:
-            print("Failed to add book")
-            print(e)
-    books = Book.query.all()
-    return render_template("home.html", books=books)
-
+    films = Film.query.all()
+    return render_template("home.html", books=books, films=films)
 
 
 @app.route("/update", methods=["POST"])
@@ -113,6 +102,14 @@ def delete():
     title = request.form.get("title")
     book = Book.query.filter_by(title=title).first()
     db.session.delete(book)
+    db.session.commit()
+    return redirect("/")
+
+@app.route("/deletefilm", methods=["POST"])
+def deletefilm():
+    filmtitle = request.form.get("filmtitle")    
+    filmtitle = Film.query.filter_by(filmtitle=filmtitle).first()
+    db.session.delete(filmtitle)
     db.session.commit()
     return redirect("/")
 

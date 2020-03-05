@@ -51,7 +51,7 @@
       <div class="floatRight">
         <table class="center">
           <h1>Add Film</h1>
-          <form method="POST" action="/updatefilmtitle">
+          <form method="POST" action="/">
             <input type="text" name="filmtitle">
             <input type="text" name="director">
             <input type="submit" value="Add">
@@ -80,7 +80,7 @@
                 </td>
                 <td>
                   <form method="POST" action="./delete" style="display: inline">
-                    <input type="hidden" value="{{book.title}}" name="title">
+                    <input type="hidden" value="{{film.filmtitle}}" name="title">
                     <input type="submit" value="Delete">
                   </form>
                 </td>
