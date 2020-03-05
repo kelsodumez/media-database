@@ -40,6 +40,20 @@ def home():
     books = Book.query.all()
     return render_template("home.html", books=books)
 
+@app.route('/2', methods=["GET", "POST"])
+def homefilms():
+    films = None
+    if request.form:
+        try:
+            film = Film(title=request.form.get("title"), author=request.form.get("author"))
+            db.session.add(book)
+            db.session.commit()
+        except Exception as e:
+            print("Failed to add book")
+            print(e)
+    books = Book.query.all()
+    return render_template("home.html", books=books)
+
 
 
 @app.route("/update", methods=["POST"])
