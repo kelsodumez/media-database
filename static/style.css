@@ -1,0 +1,26 @@
+@import url('https://fonts.googleapis.com/css?family=Julius+Sans+One&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Raleway&display=swap');
+body {
+    font-family: 'Raleway';
+    color: rgb(243, 243, 243);
+    background-color: rgb(70, 70, 70);
+    text-align: left;
+  }
+
+  header {
+    font-size: 300%;
+    text-align: center;
+  }
+
+  h1 {
+    font-size: 140%;
+  }
+
+  h2 {
+    font-size: 68%;
+    text-align: center;
+  }
+
+.floatLeft { width: 50%; float: left; }
+.floatRight {width: 50%; float: right; }
+.container { overflow: hidden; }

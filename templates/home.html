@@ -1,0 +1,91 @@
+<html>
+  <body>
+    <head>
+      <link rel="stylesheet" href="/static/style.css">
+    </head>
+    <title>Media Database</title>
+    <header>Media Database</header>
+    <h2>by Kelso du Mez</h2>
+    <div class="container">
+        <div class="floatLeft">
+          <h1>Add Book</h1>
+          <form method="POST" action="/">
+            <input type="text" name="title">
+            <input type="text" name="author">
+            <input type="submit" value="Add">
+          </form>
+          <h1>Books</h1>
+              <table class="center">
+                {% for book in books %}
+                  <tr>
+                    <td>
+                      {{book.title}}
+                    </td>
+                    <td>
+                      <form method="POST" action="./update" style="display: inline">
+                        <input type="hidden" value="{{book.title}}" name="oldtitle">
+                        <input type="text" value="{{book.title}}" name="newtitle">
+                        <input type="submit" value="Update">
+                      </form>
+                    </td>
+                    <td>
+                    {{book.author}}
+                    </td>
+                    <td>
+                      <form method="POST" action="./updateauthor" style="display: inline">
+                        <input type="hidden" value="{{book.author}}" name="oldauthor">
+                        <input type="text" value="{{book.author}}" name="newauthor">
+                        <input type="submit" value="Update">
+                      </form>
+                    </td>
+                    <td>
+                      <form method="POST" action="./delete" style="display: inline">
+                        <input type="hidden" value="{{book.title}}" name="title">
+                        <input type="submit" value="Delete">
+                      </form>
+                    </td>
+                  </tr>
+                {% endfor %}
+              </table>
+            </div>
+      <div class="floatRight">
+        <table class="center">
+          <h1>Add Film</h1>
+          <form method="POST" action="/">
+            <input type="text" name="title">
+            <input type="text" name="author">
+            <input type="submit" value="Add">
+            <h1>Films</h1>
+            {% for film in films %}
+              <tr>
+                <td>
+                  {{film.filmtitle}}
+                </td>
+                <td>
+                  <form method="POST" action="./update" style="display: inline">
+                    <input type="hidden" value="{{film.filmtitle}}" name="old_filmtitle">
+                    <input type="text" value="{{film.filmtitle}}" name="new_filmtitle">
+                    <input type="submit" value="Update">
+                  </form>
+                </td>
+                <td>
+                {{film.director}}
+                </td>
+                <td>
+                  <form method="POST" action="./updateauthor" style="display: inline">
+                    <input type="hidden" value="{{film.director}}" name="old_director">
+                    <input type="text" value="{{film.director}}" name="new_director">
+                    <input type="submit" value="Update">
+                  </form>
+                </td>
+                <td>
+                  <form method="POST" action="./delete" style="display: inline">
+                    <input type="hidden" value="{{book.title}}" name="title">
+                    <input type="submit" value="Delete">
+                  </form>
+                </td>
+              </tr>
+            {% endfor %}
+          </table>
+      </div>
+    </div>
