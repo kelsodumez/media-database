@@ -51,9 +51,9 @@
       <div class="floatRight">
         <table class="center">
           <h1>Add Film</h1>
-          <form method="POST" action="/">
-            <input type="text" name="title">
-            <input type="text" name="author">
+          <form method="POST" action="/updatefilmtitle">
+            <input type="text" name="filmtitle">
+            <input type="text" name="director">
             <input type="submit" value="Add">
             <h1>Films</h1>
             {% for film in films %}
@@ -62,9 +62,9 @@
                   {{film.filmtitle}}
                 </td>
                 <td>
-                  <form method="POST" action="./update" style="display: inline">
-                    <input type="hidden" value="{{film.filmtitle}}" name="old_filmtitle">
-                    <input type="text" value="{{film.filmtitle}}" name="new_filmtitle">
+                  <form method="POST" action="./updatefilmtitle" style="display: inline">
+                    <input type="hidden" value="{{film.filmtitle}}" name="oldfilmtitle">
+                    <input type="text" value="{{film.filmtitle}}" name="newfilmtitle">
                     <input type="submit" value="Update">
                   </form>
                 </td>
@@ -72,9 +72,9 @@
                 {{film.director}}
                 </td>
                 <td>
-                  <form method="POST" action="./updateauthor" style="display: inline">
-                    <input type="hidden" value="{{film.director}}" name="old_director">
-                    <input type="text" value="{{film.director}}" name="new_director">
+                  <form method="POST" action="./updatedirector" style="display: inline">
+                    <input type="hidden" value="{{film.director}}" name="olddirector">
+                    <input type="text" value="{{film.director}}" name="newdirector">
                     <input type="submit" value="Update">
                   </form>
                 </td>

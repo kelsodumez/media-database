@@ -68,6 +68,32 @@ def updateauthor():
         print(e)
     return redirect("/")
 
+@app.route("/updatefilmtitle", methods=["POST"])
+def updatefilmtitle():
+    try:
+        newfilmtitle = request.form.get("newfilmtitle")
+        oldfilmtitle = request.form.get("oldfilmtitle")
+        film = Film.query.filter_by(filmtitle=oldfilmtitle).first()
+        film.filmtitle = newfilmtitle
+        db.session.commit()
+    except Exception as e:
+        print("Couldn't update book title")
+        print(e)
+    return redirect("/")
+
+@app.route("/updatedirector", methods=["POST"])
+def updatedirector():
+    try:
+        newdirector = request.form.get("newdirector")
+        olddirector = request.form.get("olddirector")
+        film = Film.query.filter_by(director=olddirector).first()
+        film.director = newdirector
+        db.session.commit()
+    except Exception as e:
+        print("Couldn't update book author")
+        print(e)
+    return redirect("/")
+
 @app.route("/delete", methods=["POST"])
 def delete():
     title = request.form.get("title")
