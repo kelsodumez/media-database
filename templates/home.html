@@ -56,7 +56,7 @@
             <input type="text" name="director">
             <input type="submit" value="Add">
             <h1>Films</h1>
-            {% for film in films %}
+            {% for film in films %} 
               <tr>
                 <td>
                   {{film.filmtitle}}
@@ -79,7 +79,7 @@
                   </form>
                 </td>
                 <td>
-                  <form method="POST" action="./delete" style="display: inline">
+                  <form method="POST" action="./deletefilm" style="display: inline">
                     <input type="hidden" value="{{film.filmtitle}}" name="title">
                     <input type="submit" value="Delete">
                   </form>

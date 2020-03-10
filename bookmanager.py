@@ -29,8 +29,8 @@ class Film(db.Model):
 
 @app.route('/', methods=["GET", "POST"])
 def home():
-    books = []
-    films = []
+    books = None
+    films = None
     if request.form:
         try:
             book = Book(title=request.form.get("title"), author=request.form.get("author"))
@@ -47,7 +47,7 @@ def home():
 
 @app.route("/update", methods=["POST"])
 def update():
-    try:
+    try:    
         newtitle = request.form.get("newtitle")
         oldtitle = request.form.get("oldtitle")
         book = Book.query.filter_by(title=oldtitle).first()
