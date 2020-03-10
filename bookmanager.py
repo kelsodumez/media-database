@@ -112,8 +112,8 @@ def delete():
 @app.route("/deletefilm", methods=["POST"])
 def deletefilm():
     filmtitle = request.form.get("filmtitle")    
-    filmtitle = Film.query.filter_by(filmtitle=filmtitle).first()
-    db.session.delete(filmtitle)
+    film = Film.query.filter_by(filmtitle=filmtitle).first()
+    db.session.delete(film)
     db.session.commit()
     return redirect("/")
 
