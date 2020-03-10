@@ -11,6 +11,7 @@ project_dir = os.path.dirname(os.path.abspath(__file__))
 database_file = "sqlite:///{}".format(os.path.join(project_dir, "bookdatabase.db"))
 app = Flask(__name__)
 app.config["SQLALCHEMY_DATABASE_URI"] = database_file
+app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
 
 db = SQLAlchemy(app)
@@ -33,9 +34,12 @@ def home():
     films = None
     if request.form:
         try:
-            book = Book(title=request.form.get("title"), author=request.form.get("author"))
-            film = Film(filmtitle=request.form.get("filmtitle"), director=request.form.get("director"))
-            db.session.add(book,film)
+            if not (request.form.get("title") is None or request.form.get("author") is None):
+                book = Book(title=request.form.get("title"), author=request.form.get("author"))
+                db.session.add(book)
+            if not (request.form.get("filmtitle") is None or request.form.get("director") is None):
+                film = Film(filmtitle=request.form.get("filmtitle"), director=request.form.get("director"))
+                db.session.add(film)
             db.session.commit()
         except Exception as e:
             print("Failed to add book")
